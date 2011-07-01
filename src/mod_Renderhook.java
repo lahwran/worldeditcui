@@ -13,43 +13,36 @@ public class mod_Renderhook extends BaseMod {
 	
 	@Override
 	public String Version() {
-		// TODO Auto-generated method stub
-		return "blarg";
+		return "1.7_01";
 	}
-	public static fb lastworld = null;
+	public static fd lastworld = null;
 	public static RenderEntity entity;
 	public static void spawn(Minecraft mc)
 	{
 		entity = new RenderEntity(mc, mc.f);
 		entity.d(mc.h.aM, mc.h.aN, mc.h.aO);
-		mc.f.a((si)entity);
+		mc.f.a((sn)entity);
 		entity.d(mc.h.aM, mc.h.aN, mc.h.aO);
-		System.out.println("spawned render entity");
+		// Do not run debug messages on a live compile!
+		//System.out.println("spawned render entity");
 	}
-	public void OnTickInGame(Minecraft mc)
+	
+	public boolean OnTickInGame(Minecraft mc)
 	{
-		if(mc.f!= lastworld)
+		if(mc.f != lastworld)
 		{
 			//do spawny stuff here
-
 			spawn(mc);
 			lastworld = mc.f;
 		}
-		/*boolean found = false;
-		for(int i=0; i<mc.f.b.size(); i++)
-	    {
-	        if(mc.f.b.get(i) instanceof RenderEntity) 
-	            found=true;
-	    }
-		if (!found)
-		{
-			spawn(mc);
-		}*/
+		return false;
 	}
-	@SuppressWarnings("unchecked")
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void AddRenderer(Map map) {
-		System.out.println("Attaching worldeditcui renderer");
+		// Do not run debug messages on a live compile!
+		//System.out.println("Attaching worldeditcui renderer");
 		map.put(RenderEntity.class, new RenderHooks());
 	}
 }

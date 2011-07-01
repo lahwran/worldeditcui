@@ -8,34 +8,37 @@ import net.minecraft.client.Minecraft;
  * @author lahwran
  *
  */
-public class RenderEntity extends si {
+public class RenderEntity extends sn {
 
     
     Minecraft mc;
     /**
      * @param arg0
      */
-    public RenderEntity(Minecraft mc, fb arg0)
+    public RenderEntity(Minecraft mc, fd arg0)
     {
         super(arg0);
-        bL=true; //ignoreFrustumCheck \o/
-        System.out.println("Entity spawned");
+        bM=true; //ignoreFrustumCheck \o/
+        //Do not run debug messages on a live compile!
+        //System.out.println("Entity spawned");
         this.mc = mc;
     }
 
     @Override
-    protected void a(nq arg0){} //Entity.readEntityFromNBT
+    protected void a(nu arg0){} //Entity.readEntityFromNBT
 
     @Override
     protected void b(){} //Entity.entityInit
 
     @Override
-    protected void b(nq arg0){}
+    protected void b(nu arg0){}
     
+    @Override
     public void w_()
     {
         this.d(mc.h.aM, mc.h.aN, mc.h.aO);
     }
     
+    @Override
     public void K() {}
 }

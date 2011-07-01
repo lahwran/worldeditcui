@@ -1,7 +1,7 @@
 public class spc_WorldEditCUI extends SPCPlugin {
    @Override
    public String getVersion() {
-      return "1.5_01";
+      return "1.7_01";
    }
    @Override
    public String getName() 
