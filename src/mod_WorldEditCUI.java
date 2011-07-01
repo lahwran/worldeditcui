@@ -7,6 +7,8 @@ import org.lwjgl.opengl.GL11;
 
 public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookable {
 
+    public static final boolean WORLDEDIT_CUI_DEBUG = false;
+    
     public static int     testBlockX[]      = new int[2];
     public static int     testBlockY[]      = new int[2];
     public static int     testBlockZ[]      = new int[2];
@@ -371,24 +373,25 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
         none, cuboid, polygon2d;
     }
 
-    public static Pattern commandpattern = Pattern.compile("搂5搂6搂4搂5([^|]*)\\|?(.*)");
+    public static Pattern commandpattern = Pattern.compile("񘘦񘄹([^|]*)\\|?(.*)");
     public static int     regionSize     = -1;
 
     // public static Pattern cuboidpattern = Pattern.compile("|([^|]*)|");
     public boolean processChat(String chat) {
         Matcher matcher = commandpattern.matcher(chat);
         // debug
-        System.out.println("message: " + chat);
+        if(WORLDEDIT_CUI_DEBUG) System.out.println("message: " + chat);
         if (matcher.find()) {
             // debug
-            System.out.println("'" + matcher.group(1) + "'  '" + matcher.group(2) + "'");
+            if(WORLDEDIT_CUI_DEBUG) System.out.println("'" + matcher.group(1) + "'  '" + matcher.group(2) + "'");
 
             // handshake
             if (matcher.group(1).equals("")) {
-                if (ModLoader.getMinecraftInstance().l()) // isMultiplayerWorld
+                if (ModLoader.getMinecraftInstance().l()) {// isMultiplayerWorld
                     ModLoader.getMinecraftInstance().h.a("/worldedit cui");
-                else
-                    System.out.println("/worldedit cui");
+                } else {
+                    if(WORLDEDIT_CUI_DEBUG) System.out.println("/worldedit cui");
+                }
             }
             // shape
             else {
@@ -400,11 +403,11 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
     }
 
     public static boolean handleEvent(String type, String[] params) {
-        System.out.print("CUI event: " + type + " ");
+        if(WORLDEDIT_CUI_DEBUG) System.out.print("CUI event: " + type + " ");
         for (int i = 0; i < params.length; i++) {
-            System.out.print(params[i] + " ");
+            if(WORLDEDIT_CUI_DEBUG) System.out.print(params[i] + " ");
         }
-        System.out.println();
+        if(WORLDEDIT_CUI_DEBUG) System.out.println();
         if (type.equals("s")) {
             if (params.length == 0) {
                 return false;

@@ -26,7 +26,7 @@ public class mod_Renderhook extends BaseMod {
         mc.f.a((sn) entity);
         entity.d(mc.h.aM, mc.h.aN, mc.h.aO);
         // Do not run debug messages on a live compile!
-        // System.out.println("spawned render entity");
+        if(mod_WorldEditCUI.WORLDEDIT_CUI_DEBUG) System.out.println("spawned render entity");
     }
 
     public boolean OnTickInGame(Minecraft mc) {
@@ -34,6 +34,7 @@ public class mod_Renderhook extends BaseMod {
             // do spawny stuff here
             spawn(mc);
             lastworld = mc.f;
+            return true;
         }
         return false;
     }
@@ -42,7 +43,7 @@ public class mod_Renderhook extends BaseMod {
     @Override
     public void AddRenderer(Map map) {
         // Do not run debug messages on a live compile!
-        // System.out.println("Attaching worldeditcui renderer");
+        if(mod_WorldEditCUI.WORLDEDIT_CUI_DEBUG) System.out.println("Attaching worldeditcui renderer");
         map.put(RenderEntity.class, new RenderHooks());
     }
 }

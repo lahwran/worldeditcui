@@ -19,7 +19,7 @@ public class RenderEntity extends sn {
         super(arg0);
         bM = true; // ignoreFrustumCheck \o/
         // Do not run debug messages on a live compile!
-        // System.out.println("Entity spawned");
+        if(mod_WorldEditCUI.WORLDEDIT_CUI_DEBUG) System.out.println("Entity spawned");
         this.mc = mc;
     }
 
