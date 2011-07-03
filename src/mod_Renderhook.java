@@ -34,9 +34,8 @@ public class mod_Renderhook extends BaseMod {
             // do spawny stuff here
             spawn(mc);
             lastworld = mc.f;
-            return true;
         }
-        return false;
+        return true;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

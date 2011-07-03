@@ -373,7 +373,7 @@ public class mod_WorldEditCUI extends BaseMod implements Renderhook, ChatHookabl
         none, cuboid, polygon2d;
     }
 
-    public static Pattern commandpattern = Pattern.compile("񘘦񘄹([^|]*)\\|?(.*)");
+    public static Pattern commandpattern = Pattern.compile("\u00a75\u00a76\u00a74\u00a75([^|]*)\\|?(.*)");
     public static int     regionSize     = -1;
 
     // public static Pattern cuboidpattern = Pattern.compile("|([^|]*)|");
