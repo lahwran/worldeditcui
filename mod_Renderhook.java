@@ -5,11 +5,7 @@ import net.minecraft.client.Minecraft;
 public class mod_Renderhook extends BaseMod {
 
     public mod_Renderhook() {
-        // ModLoader.getMinecraftInstance().s = new
-        // RenderHooks(ModLoader.getMinecraftInstance());
-        ModLoader.SetInGameHook(this, true, true); // the last true is because
-                                                   // we don't want to iterate
-                                                   // the entity list too often
+        ModLoader.SetInGameHook(this, true, true);
     }
 
     @Override
@@ -17,23 +13,21 @@ public class mod_Renderhook extends BaseMod {
         return "1.7_01";
     }
 
-    public static fd           lastworld = null;
+    public static World           lastworld = null;
     public static RenderEntity entity;
 
     public static void spawn(Minecraft mc) {
-        entity = new RenderEntity(mc, mc.f);
-        entity.d(mc.h.aM, mc.h.aN, mc.h.aO);
-        mc.f.a((sn) entity);
-        entity.d(mc.h.aM, mc.h.aN, mc.h.aO);
-        // Do not run debug messages on a live compile!
-        if(mod_WorldEditCUI.WORLDEDIT_CUI_DEBUG) System.out.println("spawned render entity");
+        entity = new RenderEntity(mc, mc.theWorld);
+        entity.setPosition(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ);
+        mc.theWorld.a((Entity) entity);
+        entity.setPosition(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ);
     }
 
     public boolean OnTickInGame(Minecraft mc) {
-        if (mc.f != lastworld) {
+        if (mc.theWorld != lastworld) {
             // do spawny stuff here
             spawn(mc);
-            lastworld = mc.f;
+            lastworld = mc.theWorld;
         }
         return true;
     }
@@ -41,8 +35,6 @@ public class mod_Renderhook extends BaseMod {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public void AddRenderer(Map map) {
-        // Do not run debug messages on a live compile!
-        if(mod_WorldEditCUI.WORLDEDIT_CUI_DEBUG) System.out.println("Attaching worldeditcui renderer");
         map.put(RenderEntity.class, new RenderHooks());
     }
 }
