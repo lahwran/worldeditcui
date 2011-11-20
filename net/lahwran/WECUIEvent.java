@@ -27,9 +27,6 @@ public class WECUIEvent extends Event<WECUIEvent> {
         WorldEditCUI.debug(debugmsg);
     }
 
-    public void markHandled() {
-        handled = true;
-    }
 
     public void markInvalid(String reason) {
         String debugmsg = "WARNING - INVALID WECUIEvent "+type;
@@ -47,6 +44,10 @@ public class WECUIEvent extends Event<WECUIEvent> {
 
     public int getInt(int index) {
         return (int)Float.parseFloat(params[index]);
+    }
+
+    public void markHandled() {
+        handled = true;
     }
 
     public boolean isHandled() {

@@ -1,4 +1,4 @@
-package net.lahwran.wecui.obf;
+package net.lahwran.obf;
 import java.util.ArrayList;
 
 import net.lahwran.WorldRenderEvent;

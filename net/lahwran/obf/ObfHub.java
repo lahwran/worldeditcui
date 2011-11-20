@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.lahwran.wecui.obf;
+package net.lahwran.obf;
 
 import java.io.File;
 

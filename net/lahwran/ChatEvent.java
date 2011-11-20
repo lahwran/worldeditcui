@@ -16,10 +16,11 @@ import net.lahwran.wecui.WorldEditCUI;
 public class ChatEvent extends Event<ChatEvent> implements Cancellable {
 
     public String chat;
+    public final Direction direction;
 
-    public ChatEvent(String chat) {
+    public ChatEvent(String chat, Direction direction) {
         this.chat = chat;
-        WorldEditCUI.debug("chat message: " + chat);
+        this.direction = direction;
     }
 
     @Override
@@ -36,4 +37,11 @@ public class ChatEvent extends Event<ChatEvent> implements Cancellable {
         this.cancelled = cancelled;
     }
 
+    public static enum Direction {
+        INCOMING,
+        OUTGOING;
+        public String toString() {
+            return name().toLowerCase();
+        }
+    }
 }

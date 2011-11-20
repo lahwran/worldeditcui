@@ -3,7 +3,7 @@
  */
 package net.lahwran.wecui.rendering;
 
-import net.lahwran.wecui.obf.ObfHub;
+import net.lahwran.obf.ObfHub;
 
 import org.lwjgl.opengl.GL11;
 

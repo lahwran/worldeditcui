@@ -1,4 +1,4 @@
-package net.lahwran.wecui.obf;
+package net.lahwran.obf;
 import deobf.kj;
 import deobf.rv;
 import deobf.xb;

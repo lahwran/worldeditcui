@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import net.lahwran.ChatEvent;
 import net.lahwran.WECUIEvent;
+import net.lahwran.ChatEvent.Direction;
 import net.lahwran.fevents.EventManager;
 import net.lahwran.fevents.Listener;
 
@@ -22,16 +23,19 @@ public class ChatListener implements Listener<ChatEvent> {
 
     @Override
     public void onEvent(ChatEvent event) {
-        Matcher matcher = commandpattern.matcher(event.chat);
+        WorldEditCUI.debug(event.direction+" chat message: " + event.chat);
+        if (event.direction == Direction.INCOMING) {
+            Matcher matcher = commandpattern.matcher(event.chat);
 
-        if (matcher.find()) {
-            String type = matcher.group(1);
-            String args = matcher.group(2);
-            WorldEditCUI.debug("server-sent event: '" + type + "'  '" + args + "'");
+            if (matcher.find()) {
+                String type = matcher.group(1);
+                String args = matcher.group(2);
+                WorldEditCUI.debug("server-sent event: '" + type + "'  '" + args + "'");
 
-            WECUIEvent wecuievent = new WECUIEvent(type, args.split("[|]"));
-            EventManager.callEvent(wecuievent);
-            event.setCancelled(wecuievent.isHandled());
+                WECUIEvent wecuievent = new WECUIEvent(type, args.split("[|]"));
+                EventManager.callEvent(wecuievent);
+                event.setCancelled(wecuievent.isHandled());
+            }
         }
     }
 }

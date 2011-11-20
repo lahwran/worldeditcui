@@ -16,21 +16,23 @@ import org.lwjgl.opengl.GL11;
  */
 public class CuboidRegion extends CuiRegion {
 
-    private final HighlightPosition[] pts;
+    /**
+     * highlight points
+     */
+    protected HighlightPosition[] pts;
 
-    public static LineInfo firstpoint = new LineInfo(3.0f, 0.2f, 0.8f, 0.2f);
-    public static LineInfo secondpoint = new LineInfo(3.0f, 0.2f, 0.2f, 0.8f);
-    public static LineInfo gridnormal = new LineInfo(3.0f, 0.8F, 0.2F, 0.2F, 0.2f, GL11.GL_LESS);
-    public static LineInfo gridhidden = new LineInfo(2.0f, 0.4F, 0.1F, 0.1F, 0.1f, GL11.GL_GEQUAL);
-    public static LineInfo boxnormal = new LineInfo(3.0f, 0.8F, 0.2F, 0.2F, 1.0f, GL11.GL_LESS);
-    public static LineInfo boxhidden = new LineInfo(2.0f, 0.4F, 0.1F, 0.1F, 0.2f, GL11.GL_GEQUAL);
-
+    /**
+     * Bounding box
+     */
     public double x1, y1, z1, x2, y2, z2;
 
+    /**
+     * Initializes the thingy
+     */
     public CuboidRegion() {
         pts = new HighlightPosition[2];
-        pts[0] = new HighlightPosition(firstpoint, 0.8f, 0.2f);
-        pts[1] = new HighlightPosition(secondpoint, 0.8f, 0.2f);
+        pts[0] = new HighlightPosition(Colors.firstnormal, Colors.firsthidden);
+        pts[1] = new HighlightPosition(Colors.secondnormal, Colors.secondhidden);
     }
 
     @Override
@@ -38,13 +40,16 @@ public class CuboidRegion extends CuiRegion {
         pts[0].render();
         pts[1].render();
         if (pts[0].active && pts[1].active) {
-            RenderShapes.gridSurface(gridnormal, x1, y1, z1, x2, y2, z2);
-            RenderShapes.gridSurface(gridhidden, x1, y1, z1, x2, y2, z2);
-            RenderShapes.box(boxhidden, x1, y1, z1, x2, y2, z2);
-            RenderShapes.box(boxnormal, x1, y1, z1, x2, y2, z2);
+            RenderShapes.gridSurface(Colors.gridnormal, x1, y1, z1, x2, y2, z2);
+            RenderShapes.gridSurface(Colors.gridhidden, x1, y1, z1, x2, y2, z2);
+            RenderShapes.box(Colors.boxhidden, x1, y1, z1, x2, y2, z2);
+            RenderShapes.box(Colors.boxnormal, x1, y1, z1, x2, y2, z2);
         }
     }
 
+    /**
+     * recalculates the bounding box
+     */
     private void calcBounds() {
         double off = 0.02;
         double off1 = 1 + off;

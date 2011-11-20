@@ -12,8 +12,8 @@ import net.lahwran.ChatEvent;
 import net.lahwran.WECUIEvent;
 import net.lahwran.WorldRenderEvent;
 import net.lahwran.fevents.Order;
-import net.lahwran.wecui.obf.ObfHub;
-import net.lahwran.wecui.obf.Packet3WECUIChat;
+import net.lahwran.obf.ObfHub;
+import net.lahwran.obf.Packet3EventChat;
 import net.lahwran.wecui.rendering.WorldRenderListener;
 import net.minecraft.client.Minecraft;
 
@@ -23,17 +23,23 @@ import net.minecraft.client.Minecraft;
  */
 public class WorldEditCUI {
     
-    public static final String version = "v0.8 for mc1.8";
+    public static final String version = "v0.9.1 for mc1.8";
 
     private static WorldEditCUI instance;
 
     private CuiRegion selection;
     private ObfHub obfhub;
 
-    private static boolean stdoutdebug = new File(ObfHub.getAppDir("minecraft"),"wecui-stdout-debug.txt").exists();
+    public static boolean stdoutdebug;
     private static File debugfile = new File(ObfHub.getAppDir("minecraft"),"wecui-debug.txt");
     private static boolean debug = debugfile.exists();
     private static BufferedWriter debugwriter = null;
+
+    static {
+        stdoutdebug = new File(ObfHub.getAppDir("minecraft"),"wecui-stdout-debug.txt").exists() ||
+                            System.getProperty("debug") != null;
+        
+    }
 
     /**
      * @param minecraft2
@@ -49,7 +55,7 @@ public class WorldEditCUI {
         if (instance != null)
             return;
         instance = new WorldEditCUI(new ObfHub(minecraft));
-        Packet3WECUIChat.register();
+        Packet3EventChat.register();
     }
 
     public static void debug(String message) {

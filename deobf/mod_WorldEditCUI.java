@@ -2,9 +2,9 @@ package deobf;
 
 import java.util.Map;
 
+import net.lahwran.obf.RenderEntity;
+import net.lahwran.obf.RenderHooks;
 import net.lahwran.wecui.WorldEditCUI;
-import net.lahwran.wecui.obf.RenderEntity;
-import net.lahwran.wecui.obf.RenderHooks;
 import net.minecraft.client.Minecraft;
 
 import deobf.kj;
